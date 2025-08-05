@@ -23,6 +23,7 @@ ROOT_DIR="$(realpath $SCRIPT_DIR/..)"
 rm -rf "$ROOT_DIR/.coverage" "$ROOT_DIR/cov-report.xml" "$ROOT_DIR/junit-xml-report"*.xml
 
 # Install junitparser for merging reports
+pip install --upgrade pip
 pip install junitparser
 junit=0
 

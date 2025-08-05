@@ -38,7 +38,7 @@ python = "^3.11"
 rs-osam = {path = "object_storage_access_manager", develop = true}
 rs-server-common = { git = "https://github.com/RS-PYTHON/rs-server.git", branch = "develop", subdirectory = "services/common" }
 pygeofilter = { git = "https://github.com/RS-PYTHON/pygeofilter", branch = "rspy" }
-pytest = "^8.3.5"
+pytest = "^8.4.1"
 pytest-cov = "^6.1.1"
 
 [tool.poetry.group.dev]
