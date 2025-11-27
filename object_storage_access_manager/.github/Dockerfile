@@ -12,8 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ghcr.io/rs-python/python:3.11.7-slim-bookworm AS builder
+ARG PYTHON_VERSION=3.13.9
 
+# Don't use alpine, it's too different from the build stage.
+FROM ghcr.io/rs-python/python:${PYTHON_VERSION}-slim-bookworm AS builder
 
 COPY ./layer-cleanup.sh ./restore-apt.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/layer-cleanup.sh /usr/local/bin/restore-apt.sh
@@ -42,7 +44,7 @@ RUN cd /tmp/whl && pip install --no-cache-dir \
     layer-cleanup.sh
 
 # Final stage. Don't use alpine, it's too different from the build stage.
-FROM ghcr.io/rs-python/python:3.11.7-slim-bookworm
+FROM ghcr.io/rs-python/python:${PYTHON_VERSION}-slim-bookworm
 
 COPY ./layer-cleanup.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/layer-cleanup.sh
