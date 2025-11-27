@@ -46,8 +46,8 @@ RUN cd /tmp/whl && pip install --no-cache-dir \
 # Final stage. Don't use alpine, it's too different from the build stage.
 FROM ghcr.io/rs-python/python:${PYTHON_VERSION}-slim-bookworm
 
-COPY ./layer-cleanup.sh /usr/local/bin/
-RUN chmod 755 /usr/local/bin/layer-cleanup.sh
+COPY ./layer-cleanup.sh ./restore-apt.sh /usr/local/bin/
+RUN chmod 755 /usr/local/bin/layer-cleanup.sh /usr/local/bin/restore-apt.sh
 
 # Reinstall git since this is a new image layer
 RUN restore-apt.sh && apt update && apt install -y git && layer-cleanup.sh
