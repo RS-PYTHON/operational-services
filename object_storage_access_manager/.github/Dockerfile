@@ -21,7 +21,7 @@ COPY ./layer-cleanup.sh ./restore-apt.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/layer-cleanup.sh /usr/local/bin/restore-apt.sh
 
 # Install dependencies for compilation
-RUN apt update && apt upgrade -y && apt install -y git && layer-cleanup.sh
+RUN restore-apt.sh && apt update && apt upgrade -y && apt install -y git && layer-cleanup.sh
 
 # Update pip version
 RUN pip install --no-cache-dir --upgrade pip && layer-cleanup.sh
