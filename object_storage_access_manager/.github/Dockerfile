@@ -12,6 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#
+# Target Docker image name:
+# ghcr.io/rs-python/rs-osam
+#
+
 ARG PYTHON_VERSION=3.13.9
 
 # Don't use alpine, it's too different from the build stage.
@@ -77,5 +82,4 @@ ENTRYPOINT [ \
     "--host", "0.0.0.0", "--port", "8000", "[DEBUG_MODE_RELOAD]" ]
 
 LABEL org.opencontainers.image.source="https://github.com/RS-PYTHON/operational-services"
-LABEL org.opencontainers.image.ref.name="ghcr.io/rs-python/rs-osam"
 LABEL dockerfile.url="https://github.com/RS-PYTHON/operational-services/blob/develop/object_storage_access_manager/.github/Dockerfile"
