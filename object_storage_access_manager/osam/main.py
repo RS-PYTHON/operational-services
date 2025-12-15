@@ -202,7 +202,7 @@ async def get_credentials(request: Request) -> dict:
     In cluster mode, the request MUST contain oauth2 cookie in header
 
     Returns:
-        dict: A dictionary containing 'access_key', 'secret_key', 'endpoint_url', 'region_name'
+        dict: A dictionary containing 'access_key', 'secret_key', 'endpoint', 'region'
         for the user's S3 storage.
     """
     # In local mode, just return the common bucket credentials.
@@ -210,8 +210,8 @@ async def get_credentials(request: Request) -> dict:
         return {
             "access_key": os.environ["S3_ACCESSKEY"],
             "secret_key": os.environ["S3_SECRETKEY"],
-            "endpoint_url": os.environ["S3_ENDPOINT"],
-            "region_name": os.environ["S3_REGION"],
+            "endpoint": os.environ["S3_ENDPOINT"],
+            "region": os.environ["S3_REGION"],
         }
 
     # Cluster mode

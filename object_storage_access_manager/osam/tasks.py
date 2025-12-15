@@ -289,7 +289,7 @@ def get_user_s3_credentials(user: str) -> dict:
         user (str): The username for whom to retrieve S3 credentials.
 
     Returns:
-        dict: A dictionary containing 'access_key', 'secret_key', 'endpoint_url', 'region_name'
+        dict: A dictionary containing 'access_key', 'secret_key', 'endpoint', 'region'
         for the user's S3 storage.
     """
     try:
@@ -305,10 +305,10 @@ def get_user_s3_credentials(user: str) -> dict:
         return {
             "access_key": access_key,
             "secret_key": secret_key,
-            # NOTE: maybe get the endpoint url and region from another request ? 
+            # NOTE: maybe get the endpoint url and region from another request ?
             # maybe: /cloud/project/{self.ovh_service_name}/storage/access")
-            "endpoint_url": os.environ["S3_ENDPOINT"],
-            "region_name": os.environ["S3_REGION"],
+            "endpoint": os.environ["S3_ENDPOINT"],
+            "region": os.environ["S3_REGION"],
         }
 
     except Exception as exc:  # pylint: disable = broad-exception-caught
