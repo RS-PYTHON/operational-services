@@ -18,6 +18,7 @@
 # a bash environment variable name, that is interpreted by the rs-server-fronted at startup.
 # Here we don't use the frontend so we need to replace it by its python value, read from its env var.
 # pylint: disable = wrong-import-order, wrong-import-position, ungrouped-imports
+# flake8: noqa: E402
 import os
 from importlib import reload
 
