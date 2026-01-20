@@ -56,7 +56,6 @@ from rs_server_common.authentication.authentication import authenticate
 from rs_server_common.middlewares import HandleExceptionsMiddleware, apply_middlewares
 from rs_server_common.utils import init_opentelemetry
 from rs_server_common.utils.logging import Logging
-from rs_server_common.utils.utils2 import log_http_exception
 from starlette import status
 from starlette.requests import Request
 from starlette.responses import JSONResponse
@@ -189,8 +188,7 @@ def auth_validation(request: Request):
         auth_roles = [role.lower() for role in request.state.auth_roles]
         user_login = request.state.user_login
     except AttributeError as exc:
-        raise log_http_exception(
-            logger,
+        raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Authorization information is missing",
         ) from exc
@@ -198,8 +196,7 @@ def auth_validation(request: Request):
     logger.debug(f"Authorization roles for user {user_login!r}: {auth_roles}")
 
     if requested_role not in auth_roles:
-        raise log_http_exception(
-            logger,
+        raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Missing authorization role {requested_role!r} for user {user_login!r}",
         )
@@ -372,8 +369,7 @@ async def get_your_s3_credentials(request: Request) -> dict:
     try:
         user_login = request.state.user_login
     except AttributeError as exc:
-        raise log_http_exception(
-            logger,
+        raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Authorization information is missing",
         ) from exc
