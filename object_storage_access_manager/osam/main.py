@@ -486,6 +486,7 @@ app.include_router(technical_router)
 
 # Catch all exceptions and return a JSONResponse
 app.add_middleware(HandleExceptionsMiddleware)
+HandleExceptionsMiddleware.disable_default_exception_handler(app)
 
 app.router.lifespan_context = app_lifespan  # type: ignore
 init_opentelemetry.init_traces(app, "osam.service")
